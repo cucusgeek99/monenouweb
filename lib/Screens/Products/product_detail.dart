@@ -209,6 +209,7 @@ class _ProductDetailState extends State<ProductDetail> {
     final dbRef = FirebaseFirestore.instance
         .collection('products')
         .where('category', isEqualTo: widget.category)
+        .where('isValidated',isEqualTo:true)
         .get();
 
     return Scaffold(
@@ -220,33 +221,7 @@ class _ProductDetailState extends State<ProductDetail> {
             padding: EdgeInsets.only(left: 20.0),
           ),
           SizedBox(height: 15.0),
-          // GestureDetector(
-          //   onTap: () {
-          //     // null;
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => HeroPhotoViewRouteWrapper(
-          //           imageProvider: NetworkImage(widget.assetPath),
-          //         ),
-          //       ),
-          //     );
-          //   },
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Container(
-          //       child: Hero(
-          //         tag: "someTag",
-          //         child: Image.network(
-          //           widget.assetPath,
-          //           width: 350.0,
-          //           loadingBuilder: (_, child, chunk) =>
-          //               chunk != null ? const Text("loading") : child,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+
           (widget.assetPath1 == 'null')
               ? CarouselSlider(
                   items: imageSliders,
@@ -393,18 +368,6 @@ class _ProductDetailState extends State<ProductDetail> {
                           size: 30,
                         ),
                         onPressed: () async {
-                          //  var link   = await createDynamicLink();
-                          // Link.fromUri(link)
-                          // UriData.fromUri(link)
-                          // final RenderBox box = context.findRenderObject();
-                          // Share.share (
-                          //   // widget.assetPath,
-                          //   '$widget.name' ,
-                          // subject: '$Widget.price',
-                          //     sharePositionOrigin:
-                          //         box.localToGlobal(Offset.zero) & box.size);
-
-                          // Future<void> _shareImageFromUrl() async {
                           try {
                             var request = await HttpClient()
                                 .getUrl(Uri.parse(widget.assetPath));
@@ -432,16 +395,6 @@ class _ProductDetailState extends State<ProductDetail> {
                         );
                   },
                 ),
-
-                // Icon(
-                //   Icons.fiber_manual_record,
-                //   color: Colors.yellowAccent,
-                //   size: 30,
-                // ),
-                // Icon(
-                //   Icons.grade,
-                //   size: 30,
-                // )
               ],
             ),
           ),
@@ -455,50 +408,47 @@ class _ProductDetailState extends State<ProductDetail> {
                     fontSize: 18.0)),
           ),
           SizedBox(height: 20.0),
-          Expanded(
-            child: FutureBuilder(
-              future: dbRef,
-              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return GridView.builder(
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data.docs.length,
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 280.0,
-                      mainAxisSpacing: 15.0,
-                      crossAxisSpacing: 2.0,
-                    ),
-                    itemBuilder: (context, index) {
-                      return buildCard(
-                          snapshot.data.docs[index].get('productId'),
-                          snapshot.data.docs[index].get('name'),
-                          snapshot.data.docs[index]
-                              .get('price')
-                              .toInt()
-                              .toString(),
-                          snapshot.data.docs[index].get('userId'),
-                          snapshot.data.docs[index].get('img'),
-                          snapshot.data.docs[index].get('img1'),
-                          false,
-                          snapshot.data.docs[index].get('description'),
-                          snapshot.data.docs[index].get('category'),
-                          'Good',
-                          context,
-                          index);
-                    },
-                  );
-                } else if (snapshot.connectionState == ConnectionState.none) {
-                  return Center(child: Text("No data"));
-                }
+          FutureBuilder(
+            future: dbRef,
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return GridView.builder(
+                  physics: ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: snapshot.data.docs.length,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 280.0,
+                    mainAxisSpacing: 15.0,
+                    crossAxisSpacing: 2.0,
+                  ),
+                  itemBuilder: (context, index) {
+                    return buildCard(
+                        snapshot.data.docs[index].get('productId'),
+                        snapshot.data.docs[index].get('name'),
+                        snapshot.data.docs[index]
+                            .get('price')
+                            .toInt()
+                            .toString(),
+                        snapshot.data.docs[index].get('userId'),
+                        snapshot.data.docs[index].get('img'),
+                        snapshot.data.docs[index].get('img1'),
+                        false,
+                        snapshot.data.docs[index].get('description'),
+                        snapshot.data.docs[index].get('category'),
+                        'Good',
+                        context,
+                        index);
+                  },
+                );
+              } else if (snapshot.connectionState == ConnectionState.none) {
+                return Center(child: Text("No data"));
+              }
 
-                return Center(child: CircularProgressIndicator());
-              },
-            ),
+              return Center(child: CircularProgressIndicator());
+            },
           ),
         ],
       ),
-      // bottomNavigationBar: BottomBarCustom(num: numero),
     );
   }
 
@@ -530,7 +480,6 @@ class _ProductDetailState extends State<ProductDetail> {
     return dynamicLink = "https://monenou.page.link" + shortUrl.path;
   }
 }
-
 class HeroPhotoViewRouteWrapper extends StatelessWidget {
   HeroPhotoViewRouteWrapper({
     this.imageProvider,
