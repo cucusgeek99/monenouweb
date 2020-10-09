@@ -5,6 +5,7 @@ import 'package:monenou_web/Screens/Home/component/default_button.dart';
 import 'package:monenou_web/Screens/Products/ProductsGrid.dart';
 import 'package:monenou_web/Screens/Products/SignUp.dart';
 import 'package:monenou_web/Screens/Products/dashboard.dart';
+import 'package:monenou_web/Screens/Products/home_page.dart';
 import 'package:monenou_web/Screens/Products/myproduct.dart';
 import 'package:monenou_web/constant.dart';
 
@@ -158,7 +159,7 @@ class CustomAppBar extends StatelessWidget {
               // });
               Navigator.push(context, MaterialPageRoute<void>(
                 builder: (BuildContext context) {
-                  return Dashboard();
+                  return TabBarDemo();
                 },
               ));
             },
