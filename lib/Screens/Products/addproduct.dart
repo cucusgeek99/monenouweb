@@ -8,15 +8,10 @@
 // import 'package:flutter/material.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:image_picker/image_picker.dart';
-// import 'package:monenou/models/product.dart';
-// import 'package:monenou/utilities/constants.dart';
-// import 'package:monenou/views/add_image.dart';
-// import 'package:monenou/views/into_screen.dart';
-// import 'package:monenou/views/myproduct.dart';
+
 // import 'package:monenou_web/Screens/Products/into_screen.dart';
 // import 'package:monenou_web/constant.dart';
 // import 'package:provider/provider.dart';
-// import '../providers/product_provider.dart';
 
 // class EditProduct extends StatefulWidget {
 //   final Product product;
