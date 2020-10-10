@@ -8,6 +8,8 @@ import 'package:monenou_web/constant.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
+final _formKey = GlobalKey<FormState>();
+
 class PhoneVef extends StatefulWidget {
   final id;
   final ScaffoldState scaffold;
@@ -35,6 +37,7 @@ class _LoginScreenState extends State<PhoneVef> {
             child: Container(
               padding: EdgeInsets.all(32),
               child: Form(
+                key: _formKey,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +121,8 @@ class _LoginScreenState extends State<PhoneVef> {
                           textColor: Colors.white,
                           padding: EdgeInsets.all(16),
                           onPressed: () async {
-                            _verifyPhoneNumber();
+                              _verifyPhoneNumber();
+                            
                           },
                           color: orango,
                         ),
@@ -133,7 +137,9 @@ class _LoginScreenState extends State<PhoneVef> {
                           textColor: Colors.white,
                           padding: EdgeInsets.all(16),
                           onPressed: () async {
-                            _signInWithPhoneNumber();
+                            if (_formKey.currentState.validate()) {
+                              _signInWithPhoneNumber();
+                            }
                           },
                           color: orango,
                         ),
@@ -257,9 +263,9 @@ class _LoginScreenState extends State<PhoneVef> {
         });
         // Navigator.push(
         //     context, MaterialPageRoute(builder: (context) => IntroScreen()));
-          //   Navigator.of(context).pushAndRemoveUntil(
-          // MaterialPageRoute(builder: (context) => IntroScreen()),
-          // (Route<dynamic> route) => false);
+        //   Navigator.of(context).pushAndRemoveUntil(
+        // MaterialPageRoute(builder: (context) => IntroScreen()),
+        // (Route<dynamic> route) => false);
       });
     };
 
