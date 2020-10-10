@@ -2,17 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:monenou/utilities/constants.dart';
-// import 'package:monenou/views/EmailLogIn.dart';
-// import 'package:monenou/views/Home.dart';
-// import 'package:monenou/views/SignUp.dart';
-// import 'package:monenou/views/phonelogin.dart';
-// import 'package:monenou/views/home_page.dart';
-// import 'package:monenou/views/myproduct.dart';
+
 import 'package:monenou_web/Screens/Products/EmailLogIn.dart';
 import 'package:monenou_web/Screens/Products/SignUp.dart';
 import 'package:monenou_web/Screens/Products/phonelogin.dart';
@@ -642,14 +634,12 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   content: Column(
                     children: [
                       Center(
-                        child: Expanded(
-                          child: Text(
-                              'Un email de vérification vous a été envoyé , cliquez sur le lien contenu dedans pour activer votre compte ',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  fontFamily: 'Roboto')),
-                        ),
+                        child: Text(
+                            'Un email de vérification vous a été envoyé , cliquez sur le lien contenu dedans pour activer votre compte ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                fontFamily: 'Roboto')),
                       ),
                       SizedBox(
                         height: 100,
