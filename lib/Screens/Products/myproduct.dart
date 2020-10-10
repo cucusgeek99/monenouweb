@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:monenou_web/Screens/Products/SignUp.dart';
+import 'package:monenou_web/Screens/Products/UserProduct.dart';
 import 'package:monenou_web/Screens/Products/addproduct.dart';
 import 'package:monenou_web/Screens/Products/sign_in.dart';
 import 'package:monenou_web/Screens/Products/user_update.dart';
@@ -128,7 +129,8 @@ class _MyproductState extends State<Myproduct> {
                           ),
                         ));
               } else {
-               
+                // Navigator.pushReplacement(context,
+                //     MaterialPageRoute(builder: (context) => EditProduct()));
               }
             });
           },
@@ -159,50 +161,6 @@ class _MyproductState extends State<Myproduct> {
                           color: Colors.white),
                       textAlign: TextAlign.right,
                     ),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: Icon(
-                          Icons.exit_to_app,
-
-                          // color: Colors.black,
-                        ),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Center(
-                                      child: Text('Déconnexion'),
-                                    ),
-                                    content: Text('Etes-vous sur ?'),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                          child: Text('NON'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          }),
-                                      FlatButton(
-                                          child: Text('OUI'),
-                                          onPressed: () {
-                                            FirebaseAuth auth =
-                                                FirebaseAuth.instance;
-                                            auth.signOut().then((value) {
-                                              googleSignIn.signOut();
-                                              googleSignIn.disconnect();
-                                            }).then((res) {
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              MyApp()),
-                                                      (Route<dynamic> route) =>
-                                                          false);
-                                            });
-                                          }),
-                                    ],
-                                  ));
-                        },
-                      )
-                    ],
                   ),
                   SliverToBoxAdapter(
                       child: Container(
@@ -210,94 +168,85 @@ class _MyproductState extends State<Myproduct> {
                     color: orango,
                     child: Row(
                       children: <Widget>[
-                        //   FutureBuilder(
-                        // future: userinfo,
-                        // builder:
-                        //     (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                        //   if (snapshot.connectionState == ConnectionState.done) {
-
-                        Expanded(
-                          child: Container(
-                            child: Center(
-                              child: Stack(
-                                children: <Widget>[
-                                  // (avatarImageFile == null)
-                                  (photo_url != 'null'
-                                      ? Material(
-                                          child: CachedNetworkImage(
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Icon(Icons.error),
-                                            placeholder: (context, url) =>
-                                                Container(
-                                              child: CircularProgressIndicator(
-                                                strokeWidth: 2.0,
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(Colors.blue),
-                                              ),
-                                              width: 90.0,
-                                              height: 90.0,
-                                              padding: EdgeInsets.all(20.0),
+                        Container(
+                          child: Center(
+                            child: Stack(
+                              children: <Widget>[
+                                // (avatarImageFile == null)
+                                (photo_url != 'null'
+                                    ? Material(
+                                        child: CachedNetworkImage(
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                          placeholder: (context, url) =>
+                                              Container(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2.0,
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.blue),
                                             ),
-                                            imageUrl: photo_url,
                                             width: 90.0,
                                             height: 90.0,
-                                            fit: BoxFit.cover,
+                                            padding: EdgeInsets.all(20.0),
                                           ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(45.0)),
-                                          clipBehavior: Clip.hardEdge,
-                                        )
-                                      : Icon(
-                                          Icons.account_circle,
-                                          size: 90.0,
-                                          color: Colors.grey,
-                                        )),
-                                ],
-                              ),
+                                          imageUrl: photo_url,
+                                          width: 90.0,
+                                          height: 90.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(45.0)),
+                                        clipBehavior: Clip.hardEdge,
+                                      )
+                                    : Icon(
+                                        Icons.account_circle,
+                                        size: 90.0,
+                                        color: Colors.grey,
+                                      )),
+                              ],
                             ),
-                            // width: double.infinity,
-                            // margin: EdgeInsets.all(20.0),
                           ),
+                          // width: double.infinity,
+                          // margin: EdgeInsets.all(20.0),
                         ),
-                        Expanded(
-                            child: Container(
-                                height: 150,
-                                child: Column(
-                                  children: <Widget>[
-                                    (name != null)
-                                        ? Text(
-                                            name,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white),
-                                          )
-                                        : Text('Nom à définir'),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      email,
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    (phone_number != null)
-                                        ? Text(
-                                            phone_number,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white),
-                                          )
-                                        : Text('Numéro')
-                                  ],
-                                )
+                        SizedBox(
+                          width: 100,
+                        ),
+                        Container(
+                            height: 150,
+                            child: Column(
+                              children: <Widget>[
+                                (name != null)
+                                    ? Text(
+                                        name,
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      )
+                                    : Text('Nom à définir'),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  email,
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.white),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                (phone_number != null)
+                                    ? Text(
+                                        phone_number,
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      )
+                                    : Text('Numéro')
+                              ],
+                            )
 
-                                // color: Colors.blue,
-                                )),
+                            // color: Colors.blue,
+                            ),
                         //              } else if (snapshot.connectionState ==
                         //         ConnectionState.none) {
                         //       return Center(child: Text("No get(field)"));
@@ -347,78 +296,125 @@ class _MyproductState extends State<Myproduct> {
                   SliverToBoxAdapter(
                     child: SizedBox(height: 20),
                   ),
+                  // SliverToBoxAdapter(
+                  //     child: Center(
+                  //   child: Text(
+                  //     'Mes produits',
+                  //     style: TextStyle(
+                  //       fontSize: 25,
+                  //       color: Colors.blue[150],
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //   ),
+                  // )),
                   SliverToBoxAdapter(
-                      child: Center(
-                    child: Text(
-                      'Mes produits',
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.blue[150],
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )),
+                    child: ListTile(
+                        leading: Icon(Icons.preview),
+                        title: Text(
+                          'Mes produits',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'OpenSans',
+                            fontSize: 18,
+                          ),
+                        ),
+                        trailing: Icon(Icons.keyboard_arrow_right),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute<void>(
+                            builder: (BuildContext context) {
+                              return userProduct(
+                                dbProd: dbRefer,
+                              );
+                            },
+                          ));
+                        }),
+                  ),
+                  SliverToBoxAdapter(
+                    child: ListTile(
+                        leading: Icon(Icons.monetization_on),
+                        title: Text(
+                          'Booster une annonce',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'OpenSans',
+                              fontSize: 18),
+                        ),
+                        trailing: Icon(Icons.keyboard_arrow_right),
+                        onTap: () {
+                          // Navigator.push(context, MaterialPageRoute<void>(
+                          //   builder: (BuildContext context) {
+                          //     return BoostList(
+                          //       userid: widget.id,
+                          //     );
+                          //   },
+                          // ));
+                        }),
+                  ),
+                  SliverToBoxAdapter(
+                    child: ListTile(
+                        leading: Icon(Icons.exit_to_app),
+                        title: Text(
+                          'Se déconnecter',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'OpenSans',
+                              fontSize: 18),
+                        ),
+                        trailing: Icon(Icons.keyboard_arrow_right),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Center(
+                                      child: Text('Déconnexion'),
+                                    ),
+                                    content: Text('Etes-vous sur ?'),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                          child: Text('NON'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          }),
+                                      FlatButton(
+                                          child: Text('OUI'),
+                                          onPressed: () {
+                                            FirebaseAuth auth =
+                                                FirebaseAuth.instance;
+                                            auth.signOut().then((value) {
+                                              googleSignIn.signOut();
+                                              googleSignIn.disconnect();
+                                            }).then((res) {
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MyApp()),
+                                                      (Route<dynamic> route) =>
+                                                          false);
+                                            });
+                                          }),
+                                    ],
+                                  ));
+                        }),
+                  ),
                   SliverToBoxAdapter(
                     child: SizedBox(height: 20),
                   ),
-                  SliverToBoxAdapter(
-                    child: FutureBuilder(
-                      future: dbRefer,
-                      builder:
-                          (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return GridView.builder(
-                            physics: ScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: snapshot.data.docs.length,
-                            gridDelegate:
-                                SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 280.0,
-                              mainAxisSpacing: 15.0,
-                              crossAxisSpacing: 2.0,
-                            ),
-                            itemBuilder: (context, index) {
-                              return _buildCard(
-                                  snapshot.data.docs[index].get('productId'),
-                                  snapshot.data.docs[index].get('name'),
-                                  snapshot.data.docs[index]
-                                      .get('price')
-                                      .toInt()
-                                      .toString(),
-                                  snapshot.data.docs[index].get('userId'),
-                                  snapshot.data.docs[index].get('img'),
-                                  snapshot.data.docs[index].get('img1'),
-                                  false,
-                                  snapshot.data.docs[index].get('description'),
-                                  snapshot.data.docs[index].get('category'),
-                                  'Good',
-                                  context,
-                                  index);
-                            },
-                          );
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.none) {
-                          return Center(child: Text("No get(field)"));
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      },
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Positioned(
-                      child: isLoading
-                          ? Container(
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.blue)),
-                              ),
-                              color: Colors.white.withOpacity(0.8),
-                            )
-                          : Container(),
-                    ),
-                  )
+
+                  // SliverToBoxAdapter(
+                  //   child: Positioned(
+                  //     child: isLoading
+                  //         ? Container(
+                  //             child: Center(
+                  //               child: CircularProgressIndicator(
+                  //                   valueColor: AlwaysStoppedAnimation<Color>(
+                  //                       Colors.blue)),
+                  //             ),
+                  //             color: Colors.white.withOpacity(0.8),
+                  //           )
+                  //         : Container(),
+                  //   ),
+                  // )
                 ],
               )
             : Center(
@@ -450,7 +446,6 @@ class _MyproductState extends State<Myproduct> {
     //   userId: sellerId,
     //   // saveDate: saveDate
     // );
-    // final products = Provider.of<List<Product>>(context);
     return Padding(
         padding: EdgeInsets.only(top: 0.5, bottom: 0.1, left: 5.0, right: 5.0),
         child: InkWell(
@@ -467,9 +462,7 @@ class _MyproductState extends State<Myproduct> {
             //         //       price: price,
             //         //       category: category,
             //         //     )
-            //         EditProduct(newProduct))
-            // );
-            null;
+            //         EditProduct(newProduct)));
           },
           child: Container(
             decoration: BoxDecoration(

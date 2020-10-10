@@ -174,24 +174,22 @@ final greyColor2 = Color(0xffE8E8E8);
                 ),
                 Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Expanded(
-                      child: SignInButton(
-                        Buttons.Google,
-                        text: "Google",
-                        onPressed: () {
-                          signInWithGoogle(context);
-                          // whenComplete(() {
-                          //   Navigator.of(context).push(
-                          //     MaterialPageRoute(
-                          //       builder: (context) {
-                          //         return Myproduct();
-                          //       },
-                          //     ),
-                          //   );
-                          // }
-                          
-                        },
-                      ),
+                    child: SignInButton(
+                      Buttons.Google,
+                      text: "Google",
+                      onPressed: () {
+                        signInWithGoogle(context);
+                        // whenComplete(() {
+                        //   Navigator.of(context).push(
+                        //     MaterialPageRoute(
+                        //       builder: (context) {
+                        //         return Myproduct();
+                        //       },
+                        //     ),
+                        //   );
+                        // }
+                        
+                      },
                     )),
                 Padding(
                     padding: EdgeInsets.all(10.0),

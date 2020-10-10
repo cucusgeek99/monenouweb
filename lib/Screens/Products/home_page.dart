@@ -202,19 +202,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Column(children: [
                       Container(
                         color: orango,
-                        height: 100,
+                        height: 200,
                         child: SearchBox(),
                       ),
                       Container(
                           margin: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
                           color: Colors.white,
-                          height: 50,
+                          height: 100,
                           child: CategoryW()),
                       CarouselSlider(
                         items: imageSliders,
                         options: CarouselOptions(
-                            height: 100,
+                            height: 200,
                             autoPlay: true,
                             autoPlayInterval: Duration(seconds: 5),
                             enlargeCenterPage: true,
@@ -536,26 +536,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Stack(
                     children: <Widget>[
                       Image.network(item,
-                          fit: BoxFit.cover, width: 1000.0, height: 100),
-                      // Positioned(
-                      //   bottom: 0.0,
-                      //   left: 0.0,
-                      //   right: 0.0,
-                      //   child: Container(
-                      //     decoration: BoxDecoration(
-                      //       // gradient: LinearGradient(
-                      //       //   colors: [
-                      //       //     Color.fromARGB(200, 0, 0, 0),
-                      //       //     Color.fromARGB(0, 0, 0, 0)
-                      //       //   ],
-                      //       //   begin: Alignment.bottomCenter,
-                      //       //   end: Alignment.topCenter,
-                      //       // ),
-                      //     ),
-                      //     // padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-
-                      //   ),
-                      // ),
+                          fit: BoxFit.cover, width: 1000.0, height: 300),
                     ],
                   )),
             ),
@@ -564,7 +545,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class TabBarDemo extends StatelessWidget {
-  // final primaryColor = const Color(#EE82EE);
   TabBarDemo({Key key, String uid}) : super(key: key);
 
   @override
@@ -578,18 +558,7 @@ class TabBarDemo extends StatelessWidget {
       ),
       home: DefaultTabController(
         length: 9,
-        child: Scaffold(
-            // appBar: AppBar(
-            //   bottom: TabBar(
-            //     tabs: [
-            //       Tab(icon: Icon(Icons.directions_car)),
-            //       Tab(icon: Icon(Icons.directions_transit)),
-            //       Tab(icon: Icon(Icons.directions_bike)),
-            //     ],
-            //   ),
-            //   title: Text('Tabs Demo'),
-            // ),
-            body: MyHomePage()),
+        child: Scaffold(body: MyHomePage()),
       ),
     );
   }
