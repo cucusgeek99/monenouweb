@@ -202,19 +202,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Column(children: [
                       Container(
                         color: orango,
-                        height: 200,
+                        height: 100,
                         child: SearchBox(),
                       ),
                       Container(
                           margin: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
                           color: Colors.white,
-                          height: 100,
+                          height: 50,
                           child: CategoryW()),
                       CarouselSlider(
                         items: imageSliders,
                         options: CarouselOptions(
-                            height: 200,
+                            height: 100,
                             autoPlay: true,
                             autoPlayInterval: Duration(seconds: 5),
                             enlargeCenterPage: true,
